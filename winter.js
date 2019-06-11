@@ -45,48 +45,36 @@ const layerControl = L.control.layers({
 }).addTo(karte);
 
 
-karte.setView(
-    [47.80949, 13.05501], 10);
+const lifteGroup = L.featureGroup().addTo(karte);
+const pistenGroup = L.featureGroup().addTo(karte);
 
-const url = 'https://www.salzburg.gv.at/ogd/28c9e877-36e7-4ced-896e-6bead8f9e190/Liftanlagen.json'
+const lifteLayer = L.geoJSON(LIFTE, {
+    onEachFeature : function (feature, layer) {
+        console.log(feature)
+    },
+    style : function (geoJsonFeature) {
+        return {
+            color: "red"
+        }
+    }
+}).addTo(lifteGroup);
 
-function Liftmakemarker(geometry, latlng) {
-    const icon = L.icon({
-        iconUrl: "icons/icon_ski_alpin_schwarz_auf_weiss_250px.png",
-        iconSize: [16, 16]
-    });
-    const Liftmarker = L.marker(latlng, {
-        icon: icon
-    });
+const suchFeld = new L.Control.Search({
+    layer : lifteGroup,
+    propertyName: "Name",
+    zoom: 17,
+    initial: false 
+});
+karte.addControl(suchFeld);
 
-    Liftmarker.bindPopup(`
-        <h3>${geometry.Name}</h3>
-        <p> ${geometry.Name.attributes.Anlagenart.Saison.Status}<p>
-        <hr>
-        <footer><a href="${geometry.Name.attributes.Anlagenart.Saison.Status}" target = "Lifte" >Weblink</a></footer>
-        `);
-    return Liftmarker
-}
-async function loadLift(url) {
-    const clusterGruppe = L.markerClusterGroup();
-    const response = await fetch(url);
-    const LiftData = await response.json();
-    const geoJson = L.geoJson(LiftData, {
-        pointToLayer: Liftmakemarker
-    });
-    clusterGruppe.addLayer(geoJson);
-    karte.addLayer(clusterGruppe);
-    layerControl.addOverlay(clusterGruppe, "Liftanlagen");
 
-    const suchFeld = new L.Control.Search({
-        layer: clusterGruppe,
-        propertyName: "Name",
-        zoom: 17,
-        initial: false
-    });
-    karte.addControl(suchFeld);
-}
-loadLift(url);
+console.log()
+const pistenLayer = L.geoJSON(PISTEN, {}).addTo(pistenGroup);
+
+layerControl.addOverlay(lifteGroup, "Lifte")
+layerControl.addOverlay(pistenGroup, "Pisten")
+
+karte.fitBounds(lifteLayer.getBounds())
 
 
 //PlugIns Fullscreen, Maßstab, Minimap, Suchfeld
