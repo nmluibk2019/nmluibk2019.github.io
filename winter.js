@@ -53,6 +53,8 @@ const lifteGroup = L.featureGroup().addTo(karte);
 console.log()
 const pistenLayer = L.geoJSON(PISTEN, {}).addTo(pistenGroup);
 
+var LifteCluster = L.markerClusterGroup();
+
 const lifteLayer = L.geoJSON(LIFTE, {
     onEachFeature: function (feature, layer) {
         //console.log(feature)
@@ -72,63 +74,55 @@ const suchFeld = new L.Control.Search({
 });
 karte.addControl(suchFeld);
 
-layerControl.addOverlay(pistenGroup, "Pisten")
-layerControl.addOverlay(lifteGroup, "Lifte")
+LifteCluster.addLayer(lifteLayer);
+karte.fitBounds(LifteCluster.getBounds());
 
-karte.fitBounds(lifteLayer.getBounds())
 
-function Liftemakemarker(feature, latlng) {
-    const icon = L.icon({
-        iconUrl: 'icons/icon_ski_alpin_schwarz_auf_weiss_250px',
-        iconSize: [16, 16]
+    LifteCluster.bindPopup(function (layer) {
+        const props_lifte = layer.feature.properties;
+        const lifte_name = (props_lifte.Name)
+        const popup_text = `
+    <h1>${props_lifte.Name}</h1>
+    <p> Anlagenart: ${props_lifte.Anlagenart}<p>
+    <p> Fahrbetrieb: ${props_lifte.Fahrbetrie}<p>
+    <p> Saison: ${props_lifte.Saison}<p>
+    <p> Status: ${props_lifte.Status}<p>`;
+        return popup_text;
+
     });
-    const Liftemarker = L.marker(latlng, {
-        icon: icon
-    });
-
-    Liftemarker.bindPopup(`
-    <h2>${feature.properties.Name}</h2><br>
-    <h3> ${feature.properties.Anlagenart}</h3><br>
-    <p> ${feature.properties.Fahrbetrie}<p><br>
-    <p> ${feature.properties.Saison}<p><br>
-    <p> ${feature.properties.Status}<p><br>
-    <hr>
-    `);
-    return Liftemarker
-}
-function loadLifte(lifteLayer) {
-    L.geoJson(lifteLayer, {
-        pointToLayer: Liftemakemarker
-    });
+    karte.addLayer(LifteCluster);
 
 
 
 
-    //PlugIns Fullscreen, Maßstab, Minimap, Suchfeld
+        layerControl.addOverlay(pistenGroup, "Pisten")
+        layerControl.addOverlay(lifteGroup, "Lifte")
 
-    karte.addControl(new L.Control.Fullscreen());
+        //PlugIns Fullscreen, Maßstab, Minimap, Suchfeld
 
-    var coords = new L.Control.Coordinates();
-    coords.addTo(karte);
-    karte.on('click', function (e) {
-        coords.setCoordinates(e);
-    });
+        karte.addControl(new L.Control.Fullscreen());
 
-    const scale = L.control.scale({
-        imperial: false,
-        metric: true,
-    });
-    karte.addControl(scale);
+        var coords = new L.Control.Coordinates();
+        coords.addTo(karte);
+        karte.on('click', function (e) {
+            coords.setCoordinates(e);
+        });
 
-    new L.Control.MiniMap(
+        const scale = L.control.scale({
+            imperial: false,
+            metric: true,
+        });
+        karte.addControl(scale);
 
-        L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
-            subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
-        }), {
-            zoomLevelOffset: -4,
-            toggleDisplay: true
-        }
+        new L.Control.MiniMap(
 
-    ).addTo(karte)};
+            L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
+                subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
+            }), {
+                zoomLevelOffset: -4,
+                toggleDisplay: true
+            }
 
-    loadLifte(lifteLayer);
+        ).addTo(karte);
+
+   
