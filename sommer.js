@@ -32,10 +32,6 @@ const kartenLayer = {
         subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
         attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
     }),
-    bmapgelaende: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapgelaende/grau/google3857/{z}/{y}/{x}.jpeg", {
-        subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
-        attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>'
-    }),
     stamen_terrain: L.tileLayer("https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg", {
         subdomains: ["a", "b", "c"],
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'
@@ -54,12 +50,38 @@ const layerControl = L.control.layers({
     "Geoland Basemap": kartenLayer.geolandbasemap,
     "Geoland Basemap Grau": kartenLayer.bmapgrau,
     "Geoland Basemap Orthofoto": kartenLayer.bmaporthofoto30cm,
-    "Geoland Basemap Gelände": kartenLayer.bmapgelaende,
     "OpenStreetMap": kartenLayer.osm,
     "Stamen Terrain": kartenLayer.stamen_terrain,
     "Stamen Watercolor": kartenLayer.stamen_watercolor
 }).addTo(karte);
 
+//Fullscreen Plugin
+karte.addControl(new L.Control.Fullscreen());
+
+
+//Maßstab einbauen
+const massstab = L.control.scale({
+    imperial: false,
+    metric: true,
+});
+karte.addControl(massstab);
+
+//Koordinaten durch Klick anzeigen
+var coords = new L.Control.Coordinates ();
+coords.addTo(karte);
+karte.on('click',function (e) {
+    coords.setCoordinates (e);
+});
+
+// https://github.com/Norkart/Leaflet-MiniMap
+new L.Control.MiniMap(
+    L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
+        subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
+    }), {
+        zoomLevelOffset: -4,
+        toggleDisplay: true
+    }
+).addTo(karte);
 
 const badeGroup = L.featureGroup().addTo(karte);
 const tourradGroup = L.featureGroup().addTo(karte);
@@ -76,6 +98,7 @@ const badeLayer = L.geoJson(BADE, {
     }
 }).addTo(badeGroup);
 
+//Search Plugin bezogen auf die Komponente Badestellen
 const suchFeld = new L.Control.Search({
     layer: badeGroup,
     propertyName: "NAME",
@@ -114,26 +137,7 @@ layerControl.addOverlay(mountbkGroup, "Mountainbike Strecken")
 
 karte.fitBounds(badeLayer.getBounds())
 
-//Fullscreen Plugin
-karte.addControl(new L.Control.Fullscreen());
 
-
-//Maßstab einbauen
-const massstab = L.control.scale({
-    imperial: false,
-    metric: true,
-});
-karte.addControl(massstab);
-
-// https://github.com/Norkart/Leaflet-MiniMap
-new L.Control.MiniMap(
-    L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png", {
-        subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
-    }), {
-        zoomLevelOffset: -4,
-        toggleDisplay: true
-    }
-).addTo(karte);
 
 
 

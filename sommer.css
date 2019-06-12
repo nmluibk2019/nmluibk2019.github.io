@@ -37,3 +37,7 @@ main h2 {
 footer {
     padding: 1em 3em 0;
 }
+.leaflet-div-icon {
+    background: none;
+    border: none;
+}
