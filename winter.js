@@ -44,14 +44,16 @@ const layerControl = L.control.layers({
     "Stamen Watercolor": kartenlayer.stamen_watercolor
 }).addTo(karte);
 
-
+karte.setView([47.80949, 13.05501], 13);
 
 
 const pistenGroup = L.featureGroup().addTo(karte);
 const lifteGroup = L.featureGroup().addTo(karte);
 
-console.log()
-const pistenLayer = L.geoJSON(PISTEN, {}).addTo(pistenGroup);
+//console.log()
+const pistenLayer = L.geoJSON(PISTEN, {
+
+}).addTo(pistenGroup);
 
 var LifteCluster = L.markerClusterGroup();
 
@@ -74,9 +76,18 @@ const suchFeld = new L.Control.Search({
 });
 karte.addControl(suchFeld);
 
-LifteCluster.addLayer(lifteLayer);
-karte.fitBounds(LifteCluster.getBounds());
 
+
+function Liftemakemarker(feature, latlng) {
+    const icon = L.icon({
+        iconUrl: 'icons/icon_ski_alpin_schwarz_auf_weiss_250px.png',
+        iconSize: [16, 16]
+    });
+    
+
+LifteCluster.addLayer(lifteLayer);
+karte.addLayer(LifteCluster);
+karte.fitBounds(LifteCluster.getBounds());
 
     LifteCluster.bindPopup(function (layer) {
         const props_lifte = layer.feature.properties;
@@ -90,6 +101,15 @@ karte.fitBounds(LifteCluster.getBounds());
         return popup_text;
 
     });
+
+   
+        L.geoJson(lifteLayer, {
+            pointToLayer: Liftemakemarker
+        
+        });
+        karte.add
+    }
+
     karte.addLayer(LifteCluster);
 
 
@@ -124,5 +144,3 @@ karte.fitBounds(LifteCluster.getBounds());
             }
 
         ).addTo(karte);
-
-   
