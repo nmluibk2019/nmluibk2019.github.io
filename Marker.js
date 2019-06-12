@@ -3,9 +3,11 @@ function Liftemakemarker(feature, latlng) {
         iconUrl: 'icons/icon_ski_alpin_schwarz_auf_weiss_250px.png',
         iconSize: [16, 16]
     });
-    const LifteCluster = L.marker(latlng, {
-        icon: icon
-    });
+    
+
+LifteCluster.addLayer(lifteLayer);
+karte.addLayer(LifteCluster);
+karte.fitBounds(LifteCluster.getBounds());
 
     LifteCluster.bindPopup(function (layer) {
         const props_lifte = layer.feature.properties;
@@ -19,9 +21,39 @@ function Liftemakemarker(feature, latlng) {
         return popup_text;
 
     });
-    karte.addLayer(LifteCluster);
 
-    function loadLifte(lifteLayer) {
+   
         L.geoJson(lifteLayer, {
             pointToLayer: Liftemakemarker
+        
         });
+        karte.add
+    }
+
+    karte.addLayer(LifteCluster);
+
+
+
+
+        layerControl.addOverlay(pistenGroup, "Pisten")
+        layerControl.addOverlay(lifteGroup, "Lifte")
+
+
+
+
+        function Liftemakemarker(feature, latlng) {
+            const icon = L.icon({
+                iconUrl: 'icons/icon_ski_alpin_schwarz_auf_weiss_250px.png',
+                iconSize: [16, 16]
+            });
+            
+
+
+            L.geoJson(lifteLayer, {
+                pointToLayer: Liftemakemarker
+            
+            });
+            karte.add
+        }
+    
+        karte.addLayer(LifteCluster);

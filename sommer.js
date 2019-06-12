@@ -76,6 +76,15 @@ const badeLayer = L.geoJson(BADE, {
     }
 }).addTo(badeGroup);
 
+const suchFeld = new L.Control.Search({
+    layer: badeGroup,
+    propertyName: "NAME",
+    zoom: 17,
+    initial: false
+});
+karte.addControl(suchFeld);
+
+
 const tourradLayer = L.geoJson(TOURRAD, {
 onEachFeature : function(feature, layer) {
     console.log(feature)
@@ -125,21 +134,6 @@ new L.Control.MiniMap(
         toggleDisplay: true
     }
 ).addTo(karte);
-
-//Search Plugin einfügen // den gewünschten Layer eingügen ...z.B. Radausleihstationen
-const suchFeld = new L.Control.Search({
-    propertyName: "NAME",
-    zoom: 17,
-    initial: false //innerhalb der ganzen eichenkette wird Begriff gesucht --> Davor nur am Satzanfang gesucht
-});
-karte.addControl(suchFeld);
-
-
-
-//Radinformationen einbauen
-//Daten werden von dieser Seite bezogen
-const radinformation = 'https://data.stadt-salzburg.at/geodaten/wfs?service=WFS&version=1.1.0&request=GetFeature&srsName=urn:x-ogc:def:crs:EPSG:4326&outputFormat=application/json&typeName= ogdsbg:radinformation'
-
 
 
 

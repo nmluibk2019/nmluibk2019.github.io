@@ -76,14 +76,12 @@ const suchFeld = new L.Control.Search({
 });
 karte.addControl(suchFeld);
 
-
-
 function Liftemakemarker(feature, latlng) {
     const icon = L.icon({
         iconUrl: 'icons/icon_ski_alpin_schwarz_auf_weiss_250px.png',
         iconSize: [16, 16]
     });
-    
+     
 
 LifteCluster.addLayer(lifteLayer);
 karte.addLayer(LifteCluster);
@@ -102,17 +100,14 @@ karte.fitBounds(LifteCluster.getBounds());
 
     });
 
-   
-        L.geoJson(lifteLayer, {
-            pointToLayer: Liftemakemarker
-        
-        });
-        karte.add
-    }
+    L.geoJson(lifteLayer, {
+        pointToLayer: Liftemakemarker
+    
+    });
+    karte.add
+}
 
-    karte.addLayer(LifteCluster);
-
-
+karte.addLayer(LifteCluster);
 
 
         layerControl.addOverlay(pistenGroup, "Pisten")
