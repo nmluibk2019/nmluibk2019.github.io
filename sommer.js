@@ -60,6 +60,51 @@ const layerControl = L.control.layers({
     "Stamen Watercolor": kartenLayer.stamen_watercolor
 }).addTo(karte);
 
+
+const badeGroup = L.featureGroup().addTo(karte);
+const tourradGroup = L.featureGroup().addTo(karte);
+const mountbkGroup = L.featureGroup().addTo(karte);
+
+const badeLayer = L.geoJson(BADE, {
+    onEachFeature : function(feature, layer) {
+        console.log(feature)
+    },
+    style: function (geoJsonFeature) {
+        return {
+            color: "blue"
+        }
+    }
+}).addTo(badeGroup);
+
+const tourradLayer = L.geoJson(TOURRAD, {
+onEachFeature : function(feature, layer) {
+    console.log(feature)
+},
+style: function (geoJsonFeature) {
+    return {
+        color: "yellow"
+    }
+}
+}).addTo(tourradGroup);
+
+
+const mountbkLayer = L.geoJson (MOUNTBK, {
+    onEachFeature : function(feature, layer) {
+        console.log(feature)
+    },
+    style: function (geoJsonFeature) {
+        return {
+            color: "red"
+        }
+    }
+}).addTo(mountbkGroup);
+
+layerControl.addOverlay(badeGroup, "Badestellen")
+layerControl.addOverlay(tourradGroup, "Touristische Radtouren")
+layerControl.addOverlay(mountbkGroup, "Mountainbike Strecken")
+
+karte.fitBounds(badeLayer.getBounds())
+
 //Fullscreen Plugin
 karte.addControl(new L.Control.Fullscreen());
 
