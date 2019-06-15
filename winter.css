@@ -1,29 +1,47 @@
 body{
     max-width: 1280px;
     margin: auto;
-    font-family: "Open Sans";
+    font-family: 'Poppins', sans-serif;
 }
 
 header {
     text-align: center;
-    background-image: url("images/klimakarte_bild1.jpg");
-    background-position: 0 50%;
+    background-image: url("images/winter/ski-obertauern-2077093_1280.jpg");
+     background-position: 0 38%;
 }
 
-header h2 {
+h2 {
     font-size: 4em;
+    font-family: 'Poppins', sans-serif;
     color: black;
     margin: 0;
-    padding: 1em 0;
+    padding-bottom: 0em 0;
+    padding-top: 1em 0;
 }
 
-header h3 {
+h3 {
         font-size: 2em;
-        color: blue;
+        font-family: 'Poppins', sans-serif;
+        color:black;
         margin: 0;
-        padding: 1em 0;
+        padding: 1em 0;}
+
+h4 {
+            font-size: 2em;
+            font-family: 'Poppins', sans-serif;
+            color:black;
+            margin: 0;
+            padding: 1em 0;
 
 }
+
+p {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  a {
+    font-family: 'Poppins', sans-serif;
+  }
 
 #map {
     height: 1020px;
@@ -36,3 +54,30 @@ header h3 {
     background: none;
     border: none;
 }
+
+.youtube{
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+}
+
+.youtube iframe{
+position: absolute;
+width:  100%;
+height: 100%;
+}
+
+.lawinesalzburg{
+    width: 100%;
+    height: 100%;
+    padding-bottom: 90.25%;
+    position: relative;
+}
+
+.lawinesalzburg iframe{
+position: absolute;
+width:  100%;
+height: 100%;
+}
+
