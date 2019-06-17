@@ -17,6 +17,14 @@ header h2 {
     padding: 1em 0;
 
 }
+.menu {
+    color: white;
+    border: 1px solid black;
+    background-color: black;
+    padding: 10px;
+    
+
+}
 
 #map {
     height: 800px;
