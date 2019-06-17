@@ -52,8 +52,6 @@ const pistenLayer = L.geoJSON(PISTEN, {
 
 }).addTo(pistenGroup);
 
-var LifteCluster = L.markerClusterGroup();
-
 const lifteLayer = L.geoJSON(LIFTE, {
     onEachFeature: function (feature, layer) {
         //console.log(feature)

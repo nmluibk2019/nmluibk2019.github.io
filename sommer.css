@@ -7,12 +7,19 @@ body{
 header {
     text-align: center;
     background-image: url("images/Salzburg-stadt/markus-spiske-1185162-unsplash.jpeg");
-    zoom: -200%;
-    height: 100%;
+    object-fit: scale-down;
     width: 100%;
-     background-position: 20 0%;
+     background-position: 20 50%;
      padding-top: 180px;
      padding-bottom: 180px;
+}
+
+.menu {
+    margin-top: -60px;
+    color: white;
+    border: 1px solid black;
+    background-color: black;
+    padding: 10px;
 }
 
 header h2 {
@@ -84,4 +91,10 @@ height: 100%;
 position: absolute;
 width:  100%;
 height: 80%;
+}
+
+footer {
+border-top: 2px;
+border-top-color: black;
+margin-top: 40px;
 }

@@ -1,49 +1,99 @@
-body {
+body{
     max-width: 1280px;
     margin: auto;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 header {
-    color: #000;
-    height: 50px;
-}
-header span {
-    display: inline-block;
-    font-weight: bold;
-    vertical-align: top;
-    padding: 0.75em;
+    text-align: center;
+    background-image: url("images/Salzburg-stadt/salzburg_stadt.jpg");
+    object-fit: contain;
+    width:100%;
+     padding-top: 180px;
+     padding-bottom: 180px;
 }
 
-main h2 {
-    color: #e2001a;
-}
 .menu {
+    margin-top: -60px;
     color: white;
     border: 1px solid black;
     background-color: black;
     padding: 10px;
-    
+}
+
+header h2 {
+    font-size: 4em;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+    padding-bottom: 1em 0;
+    padding-top: 1em 0;
+}
+
+h3 {
+        font-size: 2em;
+        font-family: 'Poppins', sans-serif;
+        color:black;
+        margin: 0;
+        padding: 1em 0;}
+
+h4 {
+            font-size: 2em;
+            font-family: 'Poppins', sans-serif;
+            color:black;
+            margin: 0;
+            padding: 1em 0;
 
 }
+
+p {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  a {
+    font-family: 'Poppins', sans-serif;
+  }
 
 #map {
+    height: 900px;
     width: 100%;
-    height: 70vh;
-    border: 1px solid gray;
-}
-.back {
-    float: left;
+    border: 1px solid black;
+
 }
 
-.next {
-    float: right;
-}
-
-footer {
-    padding: 1em 3em 0;
-}
 .leaflet-div-icon {
     background: none;
     border: none;
+}
+
+.youtube{
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    position: relative;
+}
+
+.youtube iframe{
+position: absolute;
+width:  100%;
+height: 100%;
+}
+
+.wamozart{
+    width: 100%;
+    height: 0;
+    padding-bottom: 60.25%;
+    position: relative;
+}
+
+.wamozart iframe{
+position: absolute;
+width:  100%;
+height: 100%;
+}
+
+footer {
+border-top: 2px;
+border-top-color: black;
+margin-top: 40px;
 }
