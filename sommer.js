@@ -131,13 +131,63 @@ const mountbkLayer = L.geoJson (MOUNTBK, {
     }
 }).addTo(mountbkGroup);
 
-layerControl.addOverlay(badeGroup, "Badestellen")
-layerControl.addOverlay(tourradGroup, "Touristische Radtouren")
-layerControl.addOverlay(mountbkGroup, "Mountainbike Strecken")
+layerControl.addOverlay(badeGroup, '<img src="icons/swimming.png"> Badestellen')
+layerControl.addOverlay(tourradGroup,'<img src="icons/rad.png"> Touristische Radrouten')
+layerControl.addOverlay(mountbkGroup,'<img src="icons/bike.png"> Mountainbike Strecken')
 
 karte.fitBounds(badeLayer.getBounds())
 
+L.geoJson(BADE)
+//Funktion hinzufügen,damit verschiedene Attribute des Popup eingebunden werden können
+.bindPopup(function(layer,properties){
+    return`
+    <h4>${layer.feature.properties.NAME}</h4><hr>
+    Badestellenart: ${layer.feature.properties.TYP_BEZ}<br>
+    `;
+}).addTo(karte);
 
+
+
+let radverleih = L.marker([47.80298454, 13.0297052],{
+    icon: L.icon({
+        iconUrl: "icons/bikeinfo.png",
+        iconSize:     [30, 30], 
+        iconAnchor:   [12, 12], 
+        popupAnchor:  [0, 0] 
+        })
+
+}).addTo(karte).bindPopup(`<h4> Avelo Räder, E-Bikes, Service, Verleih <hr>
+Standort: Willibald-Hauthaler-Str. 10<p>
+Telefon: +43 (0)662 4355950 <hr> 
+Email: avelo@aon.at 
+</h4>`);
+
+
+let stationambahnhof = L.marker([47.81202821, 13.04644689],{
+    icon: L.icon({
+        iconUrl: "icons/bikeinfo.png",
+        iconSize:     [30, 30], 
+        iconAnchor:   [12, 12], 
+        popupAnchor:  [0, 0] 
+        })
+
+}).addTo(karte).bindPopup(`<h4>Self-Service-Station <hr> 
+Standort: Bike & Ride Hauptbahnhof - Zugang Schallmoos
+Telefon: +43 (0)662 8072 2735
+</h4>`);
+
+let radverleiharenberg = L.marker ([47.80096128, 13.06159699],{
+    icon: L.icon({
+        iconUrl: "icons/bikeinfo.png",
+        iconSize:     [30, 30], 
+        iconAnchor:   [12, 12], 
+        popupAnchor:  [0, 0] 
+        })
+}).addTo (karte).bindPopup(`<h4> Hotel Haus Arenberg / Movelo Pedelecverleih <hr>
+Standort: Blumensteinstraße 8<p>
+Telefon: +43(0)662 6400970 <hr>
+Email: info@arenberg-salzburg.at
+</h4>`); 
 
 
 
