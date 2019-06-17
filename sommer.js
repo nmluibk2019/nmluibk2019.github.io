@@ -67,10 +67,10 @@ const massstab = L.control.scale({
 karte.addControl(massstab);
 
 //Koordinaten durch Klick anzeigen
-var coords = new L.Control.Coordinates ();
+var coords = new L.Control.Coordinates();
 coords.addTo(karte);
-karte.on('click',function (e) {
-    coords.setCoordinates (e);
+karte.on('click', function (e) {
+    coords.setCoordinates(e);
 });
 
 // https://github.com/Norkart/Leaflet-MiniMap
@@ -88,7 +88,7 @@ const tourradGroup = L.featureGroup().addTo(karte);
 const mountbkGroup = L.featureGroup().addTo(karte);
 
 const badeLayer = L.geoJson(BADE, {
-    onEachFeature : function(feature, layer) {
+    onEachFeature: function (feature, layer) {
         console.log(feature)
     },
     style: function (geoJsonFeature) {
@@ -109,19 +109,19 @@ karte.addControl(suchFeld);
 
 
 const tourradLayer = L.geoJson(TOURRAD, {
-onEachFeature : function(feature, layer) {
-    console.log(feature)
-},
-style: function (geoJsonFeature) {
-    return {
-        color: "yellow"
+    onEachFeature: function (feature, layer) {
+        console.log(feature)
+    },
+    style: function (geoJsonFeature) {
+        return {
+            color: "yellow"
+        }
     }
-}
 }).addTo(tourradGroup);
 
 
-const mountbkLayer = L.geoJson (MOUNTBK, {
-    onEachFeature : function(feature, layer) {
+const mountbkLayer = L.geoJson(MOUNTBK, {
+    onEachFeature: function (feature, layer) {
         console.log(feature)
     },
     style: function (geoJsonFeature) {
@@ -131,13 +131,15 @@ const mountbkLayer = L.geoJson (MOUNTBK, {
     }
 }).addTo(mountbkGroup);
 
-layerControl.addOverlay(badeGroup, '<img src="icons/swimming.png"> Badestellen')
-layerControl.addOverlay(tourradGroup,'<img src="icons/rad.png"> Touristische Radrouten')
-layerControl.addOverlay(mountbkGroup,'<img src="icons/bike.png"> Mountainbike Strecken')
+
+layerControl.addOverlay(tourradGroup, '<img src="icons/rad.png"> Touristische Radrouten')
+layerControl.addOverlay(mountbkGroup, '<img src="icons/bike.png"> Mountainbike Strecken')
 
 karte.fitBounds(badeLayer.getBounds())
 
-L.geoJson(BADE)
+
+
+    L.geoJson(BADE)
 //Funktion hinzufügen,damit verschiedene Attribute des Popup eingebunden werden können
 .bindPopup(function(layer,properties){
     return`
@@ -147,48 +149,44 @@ L.geoJson(BADE)
 }).addTo(karte);
 
 
-
-let radverleih = L.marker([47.80298454, 13.0297052],{
-    icon: L.icon({
-        iconUrl: "icons/bikeinfo.png",
-        iconSize:     [30, 30], 
-        iconAnchor:   [12, 12], 
-        popupAnchor:  [0, 0] 
+    let radverleih = L.marker([47.80298454, 13.0297052], {
+        icon: L.icon({
+            iconUrl: "icons/bikeinfo.png",
+            iconSize: [30, 30],
+            iconAnchor: [12, 12],
+            popupAnchor: [0, 0]
         })
 
-}).addTo(karte).bindPopup(`<h4> Avelo Räder, E-Bikes, Service, Verleih <hr>
+    }).addTo(karte).bindPopup(`<h4> Avelo Räder, E-Bikes, Service, Verleih <hr>
 Standort: Willibald-Hauthaler-Str. 10<p>
 Telefon: +43 (0)662 4355950 <hr> 
 Email: avelo@aon.at 
 </h4>`);
 
 
-let stationambahnhof = L.marker([47.81202821, 13.04644689],{
-    icon: L.icon({
-        iconUrl: "icons/bikeinfo.png",
-        iconSize:     [30, 30], 
-        iconAnchor:   [12, 12], 
-        popupAnchor:  [0, 0] 
+    let stationambahnhof = L.marker([47.81202821, 13.04644689], {
+        icon: L.icon({
+            iconUrl: "icons/bikeinfo.png",
+            iconSize: [30, 30],
+            iconAnchor: [12, 12],
+            popupAnchor: [0, 0]
         })
 
-}).addTo(karte).bindPopup(`<h4>Self-Service-Station <hr> 
+    }).addTo(karte).bindPopup(`<h4>Self-Service-Station <hr> 
 Standort: Bike & Ride Hauptbahnhof - Zugang Schallmoos
 Telefon: +43 (0)662 8072 2735
 </h4>`);
 
-let radverleiharenberg = L.marker ([47.80096128, 13.06159699],{
-    icon: L.icon({
-        iconUrl: "icons/bikeinfo.png",
-        iconSize:     [30, 30], 
-        iconAnchor:   [12, 12], 
-        popupAnchor:  [0, 0] 
+    let radverleiharenberg = L.marker([47.80096128, 13.06159699], {
+        icon: L.icon({
+            iconUrl: "icons/bikeinfo.png",
+            iconSize: [30, 30],
+            iconAnchor: [12, 12],
+            popupAnchor: [0, 0]
         })
-}).addTo (karte).bindPopup(`<h4> Hotel Haus Arenberg / Movelo Pedelecverleih <hr>
+    }).addTo(karte).bindPopup(`<h4> Hotel Haus Arenberg / Movelo Pedelecverleih <hr>
 Standort: Blumensteinstraße 8<p>
 Telefon: +43(0)662 6400970 <hr>
 Email: info@arenberg-salzburg.at
-</h4>`); 
-
-
-
+</h4>`);
 

@@ -44,8 +44,8 @@ p {
   }
 
 #map {
-    height: 1020px;
-    width: 90%;
+    height: 900px;
+    width: 100%;
     border: 1px solid black;
 
 }
