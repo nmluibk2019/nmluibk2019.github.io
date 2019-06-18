@@ -1,6 +1,6 @@
 let karte = L.map("map");
 
-karte.setView([47.80949, 13.05501], 13);
+karte.setView([47.3442, 13.0428], 17);
 
 //gewünschte Kartenlayer einbauen
 const kartenLayer = {
@@ -51,6 +51,8 @@ const lifteGroup = L.featureGroup().addTo(karte);
 const pistenLayer = L.geoJSON(PISTEN, {
 
 }).addTo(pistenGroup);
+
+var LifteCluster = L.markerClusterGroup();
 
 const lifteLayer = L.geoJSON(LIFTE, {
     onEachFeature: function (feature, layer) {
