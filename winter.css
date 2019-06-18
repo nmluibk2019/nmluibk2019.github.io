@@ -57,9 +57,9 @@ p {
   }
 
 #map {
-    height: 900px;
+    height: 70vh;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid grey;
 
 }
 

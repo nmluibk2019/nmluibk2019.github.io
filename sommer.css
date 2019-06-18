@@ -55,10 +55,10 @@ p {
     font-family: 'Poppins', sans-serif;
   }
 
-#map {
-    height: 900px;
+  #map {
+    height: 70vh;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid grey;
 
 }
 
