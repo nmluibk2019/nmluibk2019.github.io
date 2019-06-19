@@ -109,7 +109,7 @@ async function wikipediaArtikelLaden(url) {
 }
 let letzteGeonamesUrl = null;
 karte.on("load zoomend moveend", function () {
-    console.log("karte geladen", karte.getBounds());
+    //console.log("karte geladen", karte.getBounds());
 
     let ausschnitt = {
         n: karte.getBounds().getNorth(),
@@ -117,9 +117,9 @@ karte.on("load zoomend moveend", function () {
         o: karte.getBounds().getEast(),
         w: karte.getBounds().getWest()
     }
-    console.log(ausschnitt);
-    const geonamesUrl = `http://api.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${ausschnitt.n}&south=${ausschnitt.s}&east=${ausschnitt.o}&west=${ausschnitt.w}&username=webmapping&style=full&maxRows=50&lang=de`;
-    console.log(geonamesUrl);
+    //console.log(ausschnitt);
+    const geonamesUrl = `https://secure.geonames.org/wikipediaBoundingBoxJSON?formatted=true&north=${ausschnitt.n}&south=${ausschnitt.s}&east=${ausschnitt.o}&west=${ausschnitt.w}&username=webmapping&style=full&maxRows=50&lang=de`;
+    //console.log(geonamesUrl);
 
     if (geonamesUrl != letzteGeonamesUrl) {
         //JSON-Artikel Laden
